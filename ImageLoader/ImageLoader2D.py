@@ -8,21 +8,24 @@ from tqdm import tqdm
 #folder_path = "/kaggle/input/dataset-ducknet/Kvasir-SEG-20241223T142106Z-001/Kvasir-SEG/"  # Add the path to your data directory
 
 
-def load_data(img_height, img_width, folder_path,images_to_be_loaded, dataset):
+def load_data(img_height, img_width, folder_path):
     IMAGES_PATH = folder_path + 'images/'
     MASKS_PATH = folder_path + 'masks/'
-
-    if dataset == 'kvasir':
-        train_ids = glob.glob(IMAGES_PATH + "*.jpg")
+    print('IMAGES_PATH: ',IMAGES_PATH)
+    print('MASKS_PATH: ',MASKS_PATH)
+    
+    train_ids = glob.glob(IMAGES_PATH + "*.jpg")
+    # if dataset == 'kvasir':
+    #     train_ids = glob.glob(IMAGES_PATH + "*.jpg")
         
-    if dataset == 'cvc-clinicdb':
-        train_ids = glob.glob(IMAGES_PATH + "*.tif")
+    # if dataset == 'cvc-clinicdb':
+    #     train_ids = glob.glob(IMAGES_PATH + "*.tif")
 
-    if dataset == 'cvc-colondb' or dataset == 'etis-laribpolypdb':
-        train_ids = glob.glob(IMAGES_PATH + "*.png")
+    # if dataset == 'cvc-colondb' or dataset == 'etis-laribpolypdb':
+    #     train_ids = glob.glob(IMAGES_PATH + "*.png")
 
-    if images_to_be_loaded == -1:
-        images_to_be_loaded = len(train_ids)
+    # if images_to_be_loaded == -1:
+    images_to_be_loaded = len(train_ids)
     
     X_train = np.zeros((images_to_be_loaded, img_height, img_width, 3), dtype=np.float32)
     Y_train = np.zeros((images_to_be_loaded, img_height, img_width), dtype=np.uint8)
