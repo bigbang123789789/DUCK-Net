@@ -14,13 +14,13 @@ def load_data(img_height, img_width, folder_path,images_to_be_loaded, dataset):
 
     if dataset == 'kvasir':
         train_ids = glob.glob(IMAGES_PATH + "*.jpg")
-        print(IMAGES_PATH)
+        
     if dataset == 'cvc-clinicdb':
         train_ids = glob.glob(IMAGES_PATH + "*.tif")
 
     if dataset == 'cvc-colondb' or dataset == 'etis-laribpolypdb':
         train_ids = glob.glob(IMAGES_PATH + "*.png")
-    print(train_ids)
+
     if images_to_be_loaded == -1:
         images_to_be_loaded = len(train_ids)
     
