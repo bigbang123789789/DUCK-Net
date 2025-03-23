@@ -34,22 +34,23 @@ def load_data(img_height, img_width, folder_path,images_to_be_loaded, dataset):
 
         image_path = id_
         mask_path = image_path.replace("images", "masks")
-
-        image = imread(image_path)
-        mask_ = imread(mask_path)
-
-        mask = np.zeros((img_height, img_width), dtype=np.bool_)
-
-        pillow_image = Image.fromarray(image)
-
-        pillow_image = pillow_image.resize((img_height, img_width))
-        image = np.array(pillow_image)
-
-        X_train[n] = image / 255
-
-        pillow_mask = Image.fromarray(mask_)
-        pillow_mask = pillow_mask.resize((img_height, img_width), resample=Image.LANCZOS)
-        mask_ = np.array(pillow_mask)
+        
+        image = Image.open(image_path).convert("RGB")  # Ensure RGB mode
+        mask_ = Image.open(mask_path).convert("L")  # Convert mask to grayscale
+        
+        # Resize images using PIL
+        image = image.resize((img_height, img_width), resample=Image.LANCZOS)
+        mask_ = mask_.resize((img_height, img_width), resample=Image.LANCZOS)
+        
+        # Convert images to numpy arrays
+        image = np.array(image, dtype=np.float32) / 255.0  # Normalize image
+        mask_ = np.array(mask_, dtype=np.uint8)  # Keep mask as integers
+        
+        # Create an empty boolean mask
+        mask = np.zeros((img_height, img_width), dtype=bool)
+        
+        # Store the processed image in X_train
+        X_train[n] = image
 
         for i in range(img_height):
             for j in range(img_width):
