@@ -5,7 +5,7 @@ from PIL import Image
 from skimage.io import imread
 from tqdm import tqdm
 
-folder_path = ""  # Add the path to your data directory
+folder_path = "/kaggle/input/dataset-ducknet/Kvasir-SEG-20241223T142106Z-001/Kvasir-SEG/"  # Add the path to your data directory
 
 
 def load_data(img_height, img_width, images_to_be_loaded, dataset):
